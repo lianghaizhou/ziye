@@ -1,0 +1,31 @@
+  
+＃文件：.github / workflows / repo-sync.yml
+名称：sync-ziye12-JavaScript
+在：
+  时间表：
+    - cron的：' 1 * / 3 * * * '
+  workflow_dispatch：
+  观看：
+    类型：开始
+  repository_dispatch：
+    类型：sync-ziye12-JavaScript
+职位：
+  回购同步：
+    env：
+      PAT：$ {{secrets.PAT}} ＃此处PAT需要申请，教程详见：https：//www.jianshu.com/p/bb82b3ad1d11
+      dst_key：$ {{ secrets.GITEE_PRIVATE_KEY }} ＃我自己同步到gitee使用，其他人可忽略
+    运行：ubuntu-latest
+    如果：github.event.repository.owner.id == github.event.sender.id
+    步骤：
+      -用途：actions / checkout @ v2
+        与：
+          持久凭证：false
+
+      -名称：同步ziye12-JavaScript
+        用途：repo-sync / github-sync @ v2
+        如果：env.PAT
+        与：
+          source_repo：“ https://github.com/ziye12/JavaScript.git ”
+          source_branch：“大师”
+          destination_branch：“主人”
+          github_token：$ {{ secrets.PAT }}
